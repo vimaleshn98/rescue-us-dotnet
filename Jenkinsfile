@@ -8,11 +8,11 @@ pipeline {
     }
 
     stages {
-        stage('Clone Repository') {
-            steps {
-                git url: 'https://github.com/vimaleshn98/rescue-us-dotnet.git', branch: 'main'
-            }
-        }
+        // stage('Clone Repository') {
+        //     steps {
+        //         git url: 'https://github.com/vimaleshn98/rescue-us-dotnet.git', branch: 'main'
+        //     }
+        // }
         
         // stage("Parallel Build Services Asp animal rescue"){
         //     parallel {
