@@ -1,4 +1,4 @@
-﻿using AnimalService.Consumers;
+﻿// using AnimalService.Consumers;
 using AnimalService.Data;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
@@ -34,8 +34,7 @@ builder.Services.AddMassTransit(x =>
 
     x.UsingRabbitMq((context, cfg) =>
     {
-
-        cfg.Host(builder.Configuration["RabbitMq:Host"], "/", host =>
+        cfg.Host(builder.Configuration["RabbitMq:Host"],5672, "/", host =>
         {
             host.Username(builder.Configuration.GetValue("RabbitMq:Username", "guest"));
             host.Password(builder.Configuration.GetValue("RabbitMq:Password", "guest"));
