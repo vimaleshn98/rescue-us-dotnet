@@ -140,7 +140,8 @@ pipeline {
                     sh "docker tag ${SEARCH_IMAGE_NAME}:${IMAGE_TAG} ${REGISTRY}/${SEARCH_IMAGE_NAME}:${IMAGE_TAG}"
                     sh "docker tag ${ANIMAL_IMAGE_NAME}:${IMAGE_TAG} ${REGISTRY}/${ANIMAL_IMAGE_NAME}:${IMAGE_TAG}"
                     withDockerRegistry(credentialsId: 'docker', url: 'https://index.docker.io/v1/') {
-                        sh "docker push ${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}"
+                        sh "docker push ${REGISTRY}/${SEARCH_IMAGE_NAME}:${IMAGE_TAG}"
+                        sh "docker push ${REGISTRY}/${ANIMAL_IMAGE_NAME}:${IMAGE_TAG}"
                     }
                 }
             }
