@@ -3,7 +3,8 @@ pipeline {
 
     environment {
         REGISTRY = 'vimalesh198' // Docker registry username
-        IMAGE_NAME = 'dotnet_animal_rescue'
+        SEARCH_IMAGE_NAME = 'dotnet_animal_rescue-search-service'
+        ANIMAL_IMAGE_NAME = 'dotnet_animal_rescue-animal-service'
         IMAGE_TAG = 'latest'
     }
 
@@ -124,6 +125,10 @@ pipeline {
         // }
 
 
+        // sudo curl -L "https://github.com/docker/compose/releases/download/v2.23.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+        // sudo chmod +x /usr/local/bin/docker-compose
+        // docker-compose --version
+
         stage('Build and Push Docker Image') {
             steps {
                 script {
@@ -132,7 +137,8 @@ pipeline {
                             ]
                     // Build and push the Docker image
                     sh 'docker-compose build'
-                    sh "docker tag ${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG} ${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}"
+                    sh "docker tag ${SEARCH_IMAGE_NAME}:${IMAGE_TAG} ${REGISTRY}/${SEARCH_IMAGE_NAME}:${IMAGE_TAG}"
+                    sh "docker tag ${ANIMAL_IMAGE_NAME}:${IMAGE_TAG} ${REGISTRY}/${ANIMAL_IMAGE_NAME}:${IMAGE_TAG}"
                     withDockerRegistry(credentialsId: 'docker', url: 'https://index.docker.io/v1/') {
                         sh "docker push ${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}"
                     }
