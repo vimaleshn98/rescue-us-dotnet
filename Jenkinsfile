@@ -9,6 +9,7 @@ pipeline {
 
     stages {
         stage('Clone Repository') {
+            agent any
             steps {
                 git url: 'https://github.com/vimaleshn98/rescue-us-dotnet.git', branch: 'main'
             }
@@ -125,6 +126,7 @@ pipeline {
 
 
         stage('Build and Push Docker Image') {
+            agent any
             steps {
                 script {
                     def userInput = input message: 'Do you want to proceed?', parameters: [
